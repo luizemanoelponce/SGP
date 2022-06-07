@@ -1,0 +1,119 @@
+@font-face {
+    font-family: Ubuntu;
+    src: url(../fonts/Ubuntu-Regular.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+
+:root{
+    --azul-principal: #204ac8;
+    --azul-destaque: #1b3688;
+    --azul-esmaecido: #3362f0;
+    --branco: #f0f0f0;
+    --preto: rgb(5, 5, 5);
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* tela de login */
+
+#login{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+#login > section {
+    height: 100vh;
+}
+
+#login > section:nth-child(1) {
+    width: 60%;
+    background-color: var(--azul-principal);
+}
+
+#login > section:nth-child(1) > main {
+    width: 100%;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#login > section:nth-child(1) > main > h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    color: var(--preto);
+}
+
+#login > section:nth-child(1) > main > h2 {
+    font-family: Roboto, sans-serif;
+    color: var(--preto);
+}
+
+#login > section:nth-child(1) > footer {
+    height: 55vh;
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    padding-bottom: 10px;
+}
+
+/* formulario de login */
+
+#login > section:nth-child(2){
+    width: 40%;
+}
+
+#login-form {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem;
+}
+
+#login-form > h1 {
+    font-family: Roboto, sans-serif;
+    font-size: 3rem;
+    color: var(--preto);
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+#login-form > form {
+    width: 100%;
+}
+
+#login-form > form > label {
+    font-weight: 700;
+}
+
+#login-form > form > input {
+    height: 1.8rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+#login-form > form > button{
+    width: 100%;
+    padding: 10px;
+    font-weight: 700;
+    border-color: var(--azul-esmaecido);
+    background-color: var(--azul-principal);
+    color: var(--branco);
+}
+
+#login-form > form > button:hover {
+    background-color: var(--azul-esmaecido);
+    border-color: var(--azul-destaque);
+}
