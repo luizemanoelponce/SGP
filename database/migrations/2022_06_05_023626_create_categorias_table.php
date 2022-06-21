@@ -18,7 +18,7 @@ class CreateCategoriasTable extends Migration
             $table->string('nome');
             $table->integer('status');
             $table->unsignedBigInteger('id_usuario_criacao');
-            $table->unsignedBigInteger('id_usuario_ultima_atualizacao');
+            $table->unsignedBigInteger('id_usuario_ultima_atualizacao')->nullable();
             $table->string('prefixo')->nullable();
 
             $table->foreign('id_usuario_criacao')->references('id')->on('users');

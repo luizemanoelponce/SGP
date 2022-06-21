@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Patrimonio extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id_categoria',
+        'id_item',
+        'numero'
+    ];
 }

@@ -4,6 +4,10 @@
 
 @section('menu')
 
+    @component('navbar-dashboard')
+    
+    @endcomponent
+
 @endsection
 
 @section('conteudo')

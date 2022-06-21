@@ -15,7 +15,7 @@ class CreateNomeAtributosTable extends Migration
     {
         Schema::create('nome_atributos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_item');
+            $table->unsignedBigInteger('id_categoria');
             $table->string('nome_do_atributo');
             $table->integer('status');
 
@@ -25,7 +25,7 @@ class CreateNomeAtributosTable extends Migration
 
             $table->foreign('id_usuario_criador')->references('id')->on('users');
             $table->foreign('id_usuario_ultima_atualizacao')->references('id')->on('users');
-            $table->foreign('id_item')->references('id')->on('items');
+            $table->foreign('id_categoria')->references('id')->on('categorias');
         });
     }
 

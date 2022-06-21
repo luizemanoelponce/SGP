@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,10 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
     
-    Route::get('/home', function(){
-        return view('dashboard');
-    })->name('dashboardHome');
+    Route::get('/home/{id?}', [DashboardController::class, 'dashboardHome'])->name('dashboardHome');
+    Route::get('/home/{id?}/ver', [DashboardController::class, 'dashboardVer'])->name('dashboardVer');
+    Route::get('/home/{id?}/editar', [DashboardController::class, 'dashboardEdita'])->name('dashboardEdita');
+    Route::post('home/{id?}/editar', [DashboardController::class, 'dashboardEditar'])->name('dashboardEditar');
 
 });
 
