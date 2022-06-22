@@ -14,4 +14,6 @@ class Patrimonio extends Model
         'id_item',
         'numero'
     ];
+
+    public $timestamps = true;
 }

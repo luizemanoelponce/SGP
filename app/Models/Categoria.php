@@ -16,4 +16,6 @@ class categoria extends Model
         'id_usuario_atualizacao',
         'prefixo'
     ];
+
+    public $timestamps = true;
 }

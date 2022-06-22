@@ -18,42 +18,45 @@
                         <th>Cadastrado por:</th>
                     </tr>
 
-                    @php $i=0; @endphp
+                    @php $class_calc=0; @endphp
 
                     @foreach (json_decode($items) as $item)
-                        @php
-                            if($item->created_at){
-                                $item->created_at = new DateTime($item->created_at);
-                                $item->created_at = $item->created_at->format('d/m/Y');
-                            }
-                            if($item->data_de_aquisicao){
-                                $item->data_de_aquisicao = new DateTime($item->data_de_aquisicao);
-                                $item->data_de_aquisicao = $item->data_de_aquisicao->format('d/m/Y');
-                            }
-                            
-
-                            $i++;
-
-                            if ($i > 2) {
-                                $i = 1;
-                            }
-
-                            if ($i == 1){
-                                $class = "table-row-light";
-                            } else {
-                                $class = "table-row-black";
-                            }
-
-                            echo'<tr class="table-row ' . $class . '">';
-                        @endphp
-
-                        @foreach ($item as $key => $i)
-                        @if ($i == null)
                             @php
-                                $item->$key = "N/A";
+
+                                if($item->created_at){
+                                    $item->created_at = new DateTime($item->created_at);
+                                    $item->created_at = $item->created_at->format('d/m/Y');
+                                }
+                                if($item->data_de_aquisicao){
+                                    $item->data_de_aquisicao = new DateTime($item->data_de_aquisicao);
+                                    $item->data_de_aquisicao = $item->data_de_aquisicao->format('d/m/Y');
+                                }
+                                
+                                $class_calc = 1;
+
+                                // $class_calc = $class_calc + 1;
+
+                                if ($class_calc > 2) {
+                                    $class_calc = 1;
+                                }
+
+                                if ($class_calc == 1){
+                                    $class = "table-row-light";
+                                } else {
+                                    $class = "table-row-black";
+                                }
+
+                                echo'<tr class="table-row ' . $class . '">';
+
                             @endphp
-                        @endif
-                        @endforeach
+
+                            @foreach ($item as $key => $i)
+                                @if ($i == null)
+                                    @php
+                                        $item->$key = "N/A";
+                                    @endphp
+                                @endif
+                            @endforeach
 
                             <td>{{ $item->prefixo.sprintf("%04s",$item->patrimonio) }}</td>
                             <td>{{ $item->nome }}</td>

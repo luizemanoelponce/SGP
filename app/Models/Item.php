@@ -26,6 +26,8 @@ class Item extends Model
         'id_categoria',
     ];
 
+    public $timestamps = true;
+
     public function getItemsForCategorias($id){
         $items = DB::table('items')
             ->join('categorias', 'items.id_categoria', '=', 'categorias.id')
@@ -60,7 +62,7 @@ class Item extends Model
 
             $atributos = Nome_atributo::where('id_categoria', $items[0]->id_categoria)->get();
 
-        }
+        } 
 
         $ultimaAtualizacao = [];
 

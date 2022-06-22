@@ -9,6 +9,7 @@
 
         <section class="dashboard-edicao">
             @php
+            $indices_atributos = "";
 
                 $items = json_decode($items);
                 
@@ -20,12 +21,14 @@
                     $items[0][0]->updated_at = new DateTime($items[0][0]->updated_at);
                     $items[0][0]->updated_at = $items[0][0]->updated_at->format('d/m/Y');
                 }
-                if($items[0][0]->data_de_aquisicao){
-                    $items[0][0]->data_de_aquisicao = new DateTime($items[0][0]->data_de_aquisicao);
-                    $items[0][0]->data_de_aquisicao = $items[0][0]->data_de_aquisicao->format('d/m/Y');
+
+                if(isset($_GET['status'])){
+                    echo '<div class="status">'. $_GET['status'] .'</div>';
                 }
 
             @endphp
+
+            
 
             <h2>{{ $items[0][0]->nome }}</h2>
 
@@ -47,25 +50,31 @@
                             $items[2] = 'N/A';
                         }
                     @endphp
+
+                    <input type="hidden" name="id_item" value="{{ $item->id }}">
                     
                     <span>
-                        Nome:  <input name="nome" type="text" value="{{ $item->nome }}">
+                        Nome:  <input name="nome" type="text" value="{{ $item->nome }}" required>
                     </span>
 
                     <span>
-                        Patrimônio:  <input type="text" value="{{ $item->prefixo.sprintf("%04s",$item->patrimonio) }}" readonly>
+                        Patrimônio:  <input type="text" value="{{ $item->prefixo.sprintf("%04s",$item->patrimonio) }}" readonly required>
                     </span>
                     <span>
-                        Localização: <input name="localizacao" type="text" value="{{ $item->localizacao }}">
+                        Localização: <input name="localizacao" type="text" value="{{ $item->localizacao }}" required>
                     </span>
                     <span>
-                        Data de Aquisição:  <input name="data_de_aquisicao" type="text" value="{{ $item->data_de_aquisicao }}">
+                        Data de Aquisição:  <input name="data_de_aquisicao" type="date" value="{{ $item->data_de_aquisicao == 'N/A' ? '0001-01-01' :  $item->data_de_aquisicao  }}" required>
                     </span>
                     <span>
-                         Categoria:  <select name="categoria">
-                            <option value="valor1">Valor 1</option>
-                            <option value="valor2" selected>Valor 2</option>
-                            <option value="valor3">Valor 3</option>
+                         Categoria:  <select name="id_categoria">
+                             @foreach ($categorias as $categoria)
+                                @if ($categoria->id == $item->id_categoria)
+                                    <option value="{{ $categoria->id }}" selected>{{ $categoria->nome }}</option>
+                                @else
+                                    <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                                @endif
+                             @endforeach
                           </select>
                     </span>
                     <span>
@@ -76,10 +85,10 @@
                     </span>
 
                     <span>
-                        Atualizado em:  <input name="" type="text" value="{{ $item->created_at }}" readonly>
+                        Atualizado em:  <input name="" type="text" value="{{ $item->updated_at }}" readonly>
                     </span>
                     <span>
-                        Atualizado por:  <input name="" type="text" value="{{ $items[2] }}" readonly>
+                        Atualizado por:  <input name="" type="text" value="{{ isset($items[2]->name) ? $items[2]->name : 'N/A' }}" readonly>
                     </span>
                     
                 @endforeach
@@ -93,25 +102,36 @@
                         @endphp
                         {{ $item->nome_do_atributo .": " }}<input name=" {{ isset($item->id_nome_atributo) ? $item->id_nome_atributo . '|' . $item->id_item : $item->id . "|" . $items[0][0]->id . '|' . $item->id_categoria  }}" 
                             type="text" value="{{ isset($item->valor) ? $item->valor : 'N/A' }}" >
+
+                         @php    
+                            $indices_atributos .= isset($item->id_nome_atributo) ? $item->id_nome_atributo . '|' . $item->id_item : $item->id . "|" . $items[0][0]->id . '|' . $item->id_categoria;
+                            $indices_atributos .= "-";
+                        @endphp
                     </span>
                 @endforeach
+                 
+
+                <input type="hidden" name="indices_atributos" value="{{ $indices_atributos }}" >
 
                 <input type="submit" value="Salvar ">
 
             </form>
 
-            @php
-                if(!$items[0][0]->id_categoria){
-                    echo '<a class="voltar" href="' . route('dashboardHome') . '">
-                        Voltar
-                    </a>';
-                } else {
-                    echo '<a class="voltar" href="' . route('dashboardHome', ['id' => $items[0][0]->id_categoria] ) . '">
-                        Voltar
-                    </a>';
-                }
-            @endphp
+            <div class="botoesAcao">
+                @php
+                    if(!$items[0][0]->id_categoria){
+                        echo '<a class="voltar" href="' . route('dashboardHome') . '">
+                            Voltar
+                        </a>';
+                    } else {
+                        echo '<a class="voltar" href="' . route('dashboardHome', ['id' => $items[0][0]->id_categoria] ) . '">
+                            Voltar
+                        </a>';
+                    }
+                @endphp
 
+            </div>
+            
             
             
 

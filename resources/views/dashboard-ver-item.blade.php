@@ -66,10 +66,13 @@
                     </span>
 
                     <span>
-                        Atualizado em:  <input type="text" value="{{ $item->created_at }}" readonly>
+                        Atualizado em:  <input type="text" value="{{ $item->updated_at }}" readonly>
                     </span>
+                    @php
+                        // dd($items);
+                    @endphp
                     <span>
-                        Atualizado por:  <input type="text" value="{{ $items[2] }}" readonly>
+                        Atualizado por:  <input type="text" value="{{ isset($items[2]->name) ? $items[2]->name : 'N/A' }}" readonly>
                     </span>
                     
                 @endforeach
@@ -84,17 +87,22 @@
 
             </form>
 
-            @php
-                if(!$items[0][0]->id_categoria){
-                    echo '<a class="voltar" href="' . route('dashboardHome') . '">
-                        Voltar
-                    </a>';
-                } else {
-                    echo '<a class="voltar" href="' . route('dashboardHome', ['id' => $items[0][0]->id_categoria] ) . '">
-                        Voltar
-                    </a>';
-                }
-            @endphp
+            <div class="botoesAcao">
+                @php
+                    if(!$items[0][0]->id_categoria){
+                        echo '<a class="voltar" href="' . route('dashboardHome') . '">
+                            Voltar
+                        </a>';
+                    } else {
+                        echo '<a class="voltar" href="' . route('dashboardHome', ['id' => $items[0][0]->id_categoria] ) . '">
+                            Voltar
+                        </a>';
+                    }
+                @endphp
+
+                <a class="alert" href='{{route("dashboardEdita", $items[0][0]->id)}}' target="__blank">Editar</a>
+
+            </div>
 
             
             

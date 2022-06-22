@@ -13,4 +13,6 @@ class Nome_atributo extends Model
         'id_categoria',
         'nome_do_atributo'
     ];
+
+    public $timestamps = true;
 }

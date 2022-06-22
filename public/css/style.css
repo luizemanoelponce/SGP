@@ -144,7 +144,7 @@
 }
 
 #dashboard > aside {
-    width: 15%;
+    width: 35vh;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -263,4 +263,43 @@
 .dashboard-edicao > form > span > input {
     outline: transparent;
     border: none
+}
+
+.botoesAcao {
+    display: inline-block;
+    position: absolute;
+    right: 3vh;
+    top: 9.5vh;
+    padding-right: 15px;
+
+}
+
+.voltar {
+    text-decoration: none;
+    background-color: var(--azul-esmaecido);
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid var(--azul-principal);
+    padding: 5px 15px;
+    margin: 0 8px 0 0
+}
+
+.voltar:hover {
+    background-color: var(--azul-principal);
+    color: var(--branco);
+    border: 1px solid var(--azul-esmaecido);
+}
+
+.status {
+    height: 5vh;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid rgb(4, 160, 30);
+    background-color:  #008000;
+    color: white;
+    font-weight: 600;
 }

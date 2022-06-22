@@ -12,10 +12,13 @@ class Atributos extends Model
 
     protected $fillable = [
         'id_nome_atributo',
+        'id_item',
         'valor',
-        'id_usuario_criador	',
+        'id_usuario_criador',
         'id_usuario_ultima_atualizacao',
     ];
+
+    public $timestamps = true;
 
     public function showAtributosItem($item){
             

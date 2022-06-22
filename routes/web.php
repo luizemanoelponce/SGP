@@ -23,6 +23,8 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
     
+    Route::get('/home/adicionar', [DashboardController::class, 'dashboardAdiciona'])->name('dashboardAdiciona');
+    Route::post('home/adicionar', [DashboardController::class, 'dashboardAdicionar'])->name('dashboardAdicionar');
     Route::get('/home/{id?}', [DashboardController::class, 'dashboardHome'])->name('dashboardHome');
     Route::get('/home/{id?}/ver', [DashboardController::class, 'dashboardVer'])->name('dashboardVer');
     Route::get('/home/{id?}/editar', [DashboardController::class, 'dashboardEdita'])->name('dashboardEdita');
