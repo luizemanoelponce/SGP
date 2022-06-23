@@ -59,7 +59,11 @@ class Item extends Model
         
         $atributos = Atributos::showAtributosItem($id);
 
-        $historico = Historico::where('id_item', $id);
+        $historico = DB::table('historicos')
+            ->join('users', 'users.id', '=', 'historicos.id_usuario_criador')
+            ->select('historicos.*', 'users.name as usuario_nome')
+            ->where('id_item', $id)
+            ->get();
 
         if(!isset($atributos[0])){
 
@@ -74,6 +78,8 @@ class Item extends Model
             $ultimaAtualizacao = User::find($items[0]->id_usuario_ultima_atualizacao);
 
         }
+
+        // dd($historico);
 
         $dados = [$items, $atributos, $ultimaAtualizacao, $historico];
 

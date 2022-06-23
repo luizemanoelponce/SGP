@@ -7,7 +7,7 @@
             
         @endcomponent
 
-        <section class="dashboard-edicao">
+        <section class="dashboard-edicao" style="">
             @php
 
                 if(isset($_GET['status'])){
@@ -35,9 +35,7 @@
                     <input type="hidden" name="id_item" value="{{$id}}">    
 
                     <span>
-                        <textarea name="descricao">
-
-                        </textarea>
+                        <textarea name="descricao"></textarea>
                     </span>
 
                 <hr>
@@ -51,6 +49,7 @@
                 <a class="voltar" href="{{route('dashboardHome')}}">Voltar</a>
 
             </div>
+            
             
         </section>
     </main>
