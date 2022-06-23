@@ -18,9 +18,9 @@
 
             
 
-            <h2>Adicionar Item:</h2>
+            <h2>Adicionar Categoria:</h2>
 
-            <form action="{{ route('dashboardAdicionar') }}" method="post">
+            <form action="{{ route('dashboardAdicionarCategoria') }}" method="post">
 
                 @csrf
                     
@@ -29,17 +29,7 @@
                     </span>
 
                     <span>
-                        Localização: <input name="localizacao" type="text" value="" required>
-                    </span>
-                    <span>
-                        Data de Aquisição:  <input name="data_de_aquisicao" type="date" value="" required>
-                    </span>
-                    <span>
-                         Categoria:  <select name="id_categoria" required>
-                             @foreach ($categorias as $categoria)
-                                <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
-                             @endforeach
-                          </select>
+                        Prefixo: <input name="prefixo" type="text" value="" required>
                     </span>
 
                 <hr>

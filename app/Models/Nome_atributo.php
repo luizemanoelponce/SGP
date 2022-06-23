@@ -11,7 +11,10 @@ class Nome_atributo extends Model
 
     protected $fillable = [
         'id_categoria',
-        'nome_do_atributo'
+        'nome_do_atributo',
+        'status',
+        'id_usuario_criador',
+        'id_usuario_ultima_atualizacao',
     ];
 
     public $timestamps = true;

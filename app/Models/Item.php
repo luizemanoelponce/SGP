@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Nome_atributo;
 use App\Models\Atributos;
+use App\Models\Historico;
 use App\Models\User;
 
 
@@ -58,6 +59,8 @@ class Item extends Model
         
         $atributos = Atributos::showAtributosItem($id);
 
+        $historico = Historico::where('id_item', $id);
+
         if(!isset($atributos[0])){
 
             $atributos = Nome_atributo::where('id_categoria', $items[0]->id_categoria)->get();
@@ -72,7 +75,7 @@ class Item extends Model
 
         }
 
-        $dados = [$items, $atributos, $ultimaAtualizacao];
+        $dados = [$items, $atributos, $ultimaAtualizacao, $historico];
 
         return $dados;
     }

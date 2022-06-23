@@ -21,6 +21,9 @@
             <h1>Bem Vindo/a</h1>
             <form action="login" method="post">
                 @csrf
+                user teste: <br>
+                master@master.local <br>
+                Master <br><br>
                 <label for="email">Email:*</label><br>
                 <input type="email" name="email" id="email" required><br>
                 <label for="senha">Senha:*</label><br>

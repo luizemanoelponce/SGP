@@ -15,6 +15,7 @@
     --branco: #f0f0f0;
     --preto: rgb(5, 5, 5);
 }
+
 * {
     padding: 0;
     margin: 0;
@@ -35,7 +36,7 @@
 
 #login > section:nth-child(1) {
     width: 60%;
-    background-color: var(--azul-principal);
+    background-color: var(--azul-esmaecido);
 }
 
 #login > section:nth-child(1) > main {
@@ -117,17 +118,29 @@
     background-color: var(--azul-esmaecido);
     border-color: var(--azul-destaque);
 }
+
 /* fim formulario de login */
 
 /* Navbar Dashboard */
 
-#navbar-dashboard{
+#navbar-dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     position: relative;
     height: 7.5vh;
     width: 100%;
     box-shadow: 0px 2px 3px black;
+    padding-right: 15px;
 }
 
+#navbar-dashboard > a {
+    margin-left: 15px;
+}
+
+#navbar-dashboard > a > img {
+    height: 3.5vh;
+}
 
 /* Fim Navbar Dashboard */
 
@@ -169,6 +182,7 @@
     color: var(--preto);
     border-bottom: 1px solid rgba(0, 0, 0, 0.404);
 }
+
 #dashboard > aside > a:hover {
     color: rgb(39, 39, 39);
     background-color: beige;
@@ -252,6 +266,11 @@
 
 .dashboard-edicao > form{
     width: 100%;
+}
+
+.dashboard-edicao > form > input[type=submit]{
+    margin: 3px;
+    padding: 3px 15px; 
 }
 
 .dashboard-edicao > form > span{

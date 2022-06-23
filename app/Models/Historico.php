@@ -9,5 +9,11 @@ class Historico extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id_item',
+        'descricao',
+        'id_usuario_criador'
+    ];
+
     public $timestamps = true;
 }
