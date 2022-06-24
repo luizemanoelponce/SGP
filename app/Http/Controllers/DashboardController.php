@@ -10,6 +10,7 @@ use App\Models\Categoria;
 use App\Models\Nome_atributo;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoriaController;
+use App\Models\Historico;
 
 class DashboardController extends Controller
 {
@@ -130,6 +131,12 @@ class DashboardController extends Controller
             "id_categoria" => $request->id_categoria,
             "id_item" => $item["id"],
             "numero" => $num_patrimonio
+        ]);
+
+        $historico = Historico::create([
+            'id_item' => $item["id"],
+            'descricao' =>  'Item Criado',
+            'id_usuario_criador' => Auth::user()->id
         ]);
 
         return redirect()->route('dashboardEdita', ['id' => $item["id"]]);

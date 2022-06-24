@@ -32,7 +32,7 @@
                         Localização: <input name="localizacao" type="text" value="" required>
                     </span>
                     <span>
-                        Data de Aquisição:  <input name="data_de_aquisicao" type="date" value="" required>
+                        Data de Aquisição:  <input name="data_de_aquisicao" type="date" value="" >
                     </span>
                     <span>
                          Categoria:  <select name="id_categoria" required>

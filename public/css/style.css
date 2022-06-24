@@ -22,6 +22,22 @@
     box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--branco);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--azul-principal);
+    border-radius: 20px;
+    border: 1.5px solid var(--azul-destaque);
+}
+
+
+
 /* tela de login */
 
 #login{
@@ -237,22 +253,21 @@
     padding-top: 15px;
 }
 
-.dashboard-exibicao > .items-atributos > h2{
+.dashboard-exibicao > h2{
     margin: 15px 0;
     font-family: Ubuntu, 'sans-serif';
 }
 
-.dashboard-exibicao > .items-atributos > form{
+form{
     width: 100%;
 }
 
-.dashboard-exibicao > .items-atributos > form > span{
+form > span{
     display: block;
     margin: 10px 0;
     font-weight: 700;
 }
-
-.dashboard-exibicao > .items-atributos > form > span > input {
+form > span > input {
     outline: transparent;
     border: none
 }
@@ -274,26 +289,12 @@ h2{
     font-family: Ubuntu, 'sans-serif';
 }
 
-.dashboard-edicao > .items-atributos > form{
-    width: 100%;
-}
 input[type=submit]{
     margin: 3px;
     padding: 3px 15px; 
 }
 
-.dashboard-edicao > .items-atributos > form > span{
-    display: block;
-    margin: 10px 0;
-    font-weight: 700;
-}
-
-.dashboard-edicao > .items-atributos > form > span > input {
-    outline: transparent;
-    border: none
-}
-
-.dashboard-edicao > form > span > textarea{
+form > span > textarea{
     min-height: 30vh;
     max-height: 70vh;
     min-width: 50%;

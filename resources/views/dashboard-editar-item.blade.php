@@ -65,7 +65,7 @@
                             Localização: <input name="localizacao" type="text" value="{{ $item->localizacao }}" required>
                         </span>
                         <span>
-                            Data de Aquisição:  <input name="data_de_aquisicao" type="date" value="{{ $item->data_de_aquisicao == 'N/A' ? '0001-01-01' :  $item->data_de_aquisicao  }}" required>
+                            Data de Aquisição:  <input name="data_de_aquisicao" type="date" value="{{ $item->data_de_aquisicao == 'N/A' ? '0001-01-01' :  $item->data_de_aquisicao  }}">
                         </span>
                         <span>
                             Categoria:  <select name="id_categoria">
@@ -126,9 +126,13 @@
                 @php
 
                     foreach ($items[3] as $item) {
+
+                        $item->created_at = new DateTime($item->created_at);
+                        $item->created_at = $item->created_at->format('d/m/Y H:m:s');
+
                         echo"
                         <div class='historico-item'>
-                            <h3>$item->usuario_nome</h3>
+                            <strong>$item->usuario_nome</strong>
                             <article>$item->descricao</article>
                             <small>$item->created_at</small>
                         </div> <hr>
