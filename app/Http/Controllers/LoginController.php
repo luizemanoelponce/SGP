@@ -18,9 +18,9 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return redirect()->route('dashboardHome');
+        } else {
+            return redirect()->route('login');
         }
-
-        dd(Auth::attempt($validado));
 
     }
 }

@@ -32,6 +32,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
     Route::post('home/adicionar/categoria', [DashboardController::class, 'dashboardAdicionarCategoria'])->name('dashboardAdicionarCategoria');
     Route::get('/home/adicionar/Atributo/categoria/{id?}', [DashboardController::class, 'dashboardAdicionaAtributoCategoria'])->name('dashboardAdicionaAtributoCategoria');
     Route::post('home/adicionar/Atributo/categoria/', [DashboardController::class, 'dashboardAdicionarAtributoCategoria'])->name('dashboardAdicionarAtributoCategoria');
+    Route::get('/home/ver/Tarefa/{id?}', [DashboardController::class, 'dashboardTarefaVer'])->name('dashboardTarefaVer');
+    Route::get('/home/concluir/Tarefa/{id?}', [DashboardController::class, 'dashboardTarefaConcluir'])->name('dashboardTarefaConcluir');
+    Route::get('/home/adicionar/Tarefa/{id?}', [DashboardController::class, 'dashboardAdicionaTarefa'])->name('dashboardAdicionaTarefa');
+    Route::post('home/adicionar/Tarefa', [DashboardController::class, 'dashboardAdicionarTarefa'])->name('dashboardAdicionarTarefa');
     Route::get('/home/{id?}', [DashboardController::class, 'dashboardHome'])->name('dashboardHome');
     Route::get('/home/{id?}/ver', [DashboardController::class, 'dashboardVer'])->name('dashboardVer');
     Route::get('/home/{id?}/editar', [DashboardController::class, 'dashboardEdita'])->name('dashboardEdita');

@@ -8,9 +8,12 @@ use App\Models\Item;
 use App\Models\Patrimonio;
 use App\Models\Categoria;
 use App\Models\Nome_atributo;
+use App\Models\Historico;
+use App\Models\TarefaPeriodo;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoriaController;
-use App\Models\Historico;
+use App\Http\Controllers\TarefaController;
+
 
 class DashboardController extends Controller
 {
@@ -26,11 +29,14 @@ class DashboardController extends Controller
 
         $categorias = $this->categorias;
 
+        $tarefas = TarefaController::index();
+
         if($request->id){
 
             return view('dashboard', [
                 'items' => json_encode(ItemController::showByCategorias($request->id), JSON_UNESCAPED_UNICODE),
                 'categorias' => $categorias,
+                'tarefas' => '' 
             ]);
 
         } else {
@@ -38,6 +44,7 @@ class DashboardController extends Controller
             return view('dashboard', [
                 'items' => '',
                 'categorias' => $categorias,
+                'tarefas' => $tarefas
             ]);
 
         }
@@ -45,14 +52,17 @@ class DashboardController extends Controller
 
     public function dashboardVer(Request $request){
 
+
         $categorias = $this->categorias;
         $items = ItemController::show($request->id);
+        $tarefas = TarefaController::getTarefasPorItem($request->id);
 
         if(count($items[0]) > 0){
             
             return view('dashboard-ver-item', [
                 'items' => json_encode($items, JSON_UNESCAPED_UNICODE),
                 'categorias' => $categorias,
+                'tarefas' => $tarefas
     
             ]);
 
@@ -65,12 +75,14 @@ class DashboardController extends Controller
 
         $categorias = $this->categorias;
         $items = ItemController::show($request->id);
+        $tarefas = TarefaController::getTarefasPorItem($request->id);
 
         if(count($items[0]) > 0){
             
             return view('dashboard-editar-item', [
                 'items' => json_encode($items, JSON_UNESCAPED_UNICODE),
                 'categorias' => $categorias,
+                'tarefas' => $tarefas
     
             ]);
 
@@ -201,5 +213,79 @@ class DashboardController extends Controller
             'id' => $atributo['id_categoria'],
         ]);
     }
+
+    public function dashboardTarefaVer(Request $request){
+
+        $tarefa = TarefaController::show($request->id);
+        
+        $categorias = $this->categorias;
+
+        if(isset($tarefa[0])){
+
+            return view('dashboard-ver-tarefa', [
+                'categorias' => $categorias,
+                'tarefas' => $tarefa 
+            ]);
+
+        } else {
+
+            return redirect()->route('dashboardHome');
+
+        }
+
+    }
+
+    public function dashboardTarefaConcluir(Request $request){
+
+        $tarefa = TarefaController::concluirTarefa($request->id);
+
+        return redirect()->route('dashboardTarefaVer', ['id' => $request->id]);
+
+    }
+
+    public function dashboardAdicionaTarefa(Request $request){
+
+        $periodos = TarefaPeriodo::all();
+
+        $categorias = $this->categorias;
+
+        return view('dashboard-adiciona-tarefa', [
+            'categorias' => $categorias,
+            'id_item' => $request->id,
+            'periodos' => $periodos
+        ]);
+
+    }
+
+    public function dashboardAdicionarTarefa(Request $request){
+
+        if($request->id_item){
+
+            $tarefa = TarefaController::AdicionaTarefaItem($request);
+
+            if( $tarefa['id'] ){
+                $status = 'Sucesso';
+            } else {
+                $status = "Falha!";
+            }
+    
+            return redirect()->route('dashboardAdicionaTarefa', ['id' => $request->id_item,  'status' => $status ]);
+
+        } else {
+
+            $tarefa = TarefaController::AdicionarTarefa($request);
+
+            if( $tarefa ){
+                $status = 'Sucesso';
+            } else {
+                $status = "Falha!";
+            }
+    
+            return redirect()->route('dashboardAdicionaTarefa', ['id' => '',  'status' => $status ]);
+
+        }
+
+    }
+
 }
 

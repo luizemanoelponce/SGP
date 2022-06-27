@@ -98,9 +98,6 @@
 
                     @foreach ($items[1] as $item)
                         <span>
-                            @php    
-                                // dd($item);   
-                            @endphp
                             {{ $item->nome_do_atributo .": " }}<input name=" {{ isset($item->id_nome_atributo) ? $item->id_nome_atributo . '|' . $item->id_item : $item->id . "|" . $items[0][0]->id . '|' . $item->id_categoria  }}" 
                                 type="text" value="{{ isset($item->valor) ? $item->valor : 'N/A' }}" >
 
@@ -117,6 +114,50 @@
                     <input type="submit" value="Salvar ">
 
                 </form>
+                <div class="tarefas">
+                    <br>
+                    <a href="{{ route('dashboardAdicionaTarefa', ['id' => $items[0][0]->id]) }}" target="_blank">Adicionar</a>
+                    <br>
+                    <strong>Tarefas:</strong>
+                    @if (!isset($tarefas[0]))
+                        <h2>Nenhuma Tarefa Cadastrada</h2>
+                    @else
+                        <br>
+                        <table>
+                            <tr class="table-row-light">
+                                <th>Tarefa</th>
+                                <th>Iniciada em:</th>
+                                <th>Iniciada por:</th>
+                                <th colspan="2">Ações:</th>
+                            </tr>
+                            
+                            @foreach($tarefas as $tarefa)
+
+                                @php 
+
+                                    if($tarefa->data_proxima_execucao){
+                                        $tarefa->data_proxima_execucao = new DateTime($tarefa->data_proxima_execucao);
+                                        $tarefa->data_proxima_execucao = $tarefa->data_proxima_execucao->format('d/m/Y');
+                                    }
+                                    if($tarefa->data_de_inicio){
+                                        $tarefa->data_de_inicio = new DateTime($tarefa->data_de_inicio);
+                                        $tarefa->data_de_inicio = $tarefa->data_de_inicio->format('d/m/Y');
+                                    }
+
+                                @endphp
+
+                                <tr class="table-row-light">
+                                    <td>{{ $tarefa->nome_da_tarefa }}</td>
+                                    <td>{{ $tarefa->data_de_inicio }}</td>
+                                    <td>{{ $tarefa->criador_nome }} </td>
+                                    <td><a class="action" href='{{route("dashboardTarefaVer", $tarefa->id)}}' target="__blank">Ver</a></td>
+                                    <td><a class="alert" href='{{route("dashboardTarefaConcluir", $tarefa->id)}}' target="__blank">Concluir</a></td>
+                                </tr>
+
+                            @endforeach
+                        </table>
+                    @endif
+                </div>
             </div>
             <div class="historico">
                 

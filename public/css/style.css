@@ -20,6 +20,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    
 }
 
 *::-webkit-scrollbar {
@@ -237,7 +238,11 @@
     color: var(--azul-principal);
 }
 
-/* formulario e visualizacao */
+/* formularios e visualizacoes */
+
+.dashboardbase{
+    padding: 8px;
+}
 
 .dashboard-exibicao{
     display: flex;
@@ -251,6 +256,7 @@
 .items-atributos{
     width: 50%;
     padding-top: 15px;
+    overflow-y: scroll;
 }
 
 .dashboard-exibicao > h2{
@@ -309,7 +315,6 @@ form > span > textarea{
     padding-right: 15px;
     background-color: white;
     border-radius: 0 0 0 5px;
-
 }
 
 .voltar {

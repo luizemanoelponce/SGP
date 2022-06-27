@@ -35,8 +35,7 @@ class Item extends Model
             ->join('users', 'items.id_usuario_criacao', '=', 'users.id')
             ->join('patrimonios', 'items.id', '=', 'patrimonios.id_item')
             ->select('items.*', 'categorias.nome as categoria_nome', 'categorias.prefixo as prefixo' , 'users.name as criador_nome', 'patrimonios.numero as patrimonio')
-            ->orderBy('categoria_nome')
-            ->orderBy('nome')
+            ->orderBy('patrimonio')
             ->where('items.status', 1)
             ->where('items.id_categoria', $id)
             ->get();
@@ -51,8 +50,6 @@ class Item extends Model
             ->join('users', 'items.id_usuario_criacao', '=', 'users.id')
             ->join('patrimonios', 'items.id', '=', 'patrimonios.id_item')
             ->select('items.*', 'categorias.nome as categoria_nome', 'categorias.prefixo as prefixo' , 'users.name as criador_nome', 'patrimonios.numero as patrimonio')
-            ->orderBy('categoria_nome')
-            ->orderBy('nome')
             ->where('items.id', $id)
             ->where('items.status', 1)
             ->get();
@@ -62,6 +59,7 @@ class Item extends Model
         $historico = DB::table('historicos')
             ->join('users', 'users.id', '=', 'historicos.id_usuario_criador')
             ->select('historicos.*', 'users.name as usuario_nome')
+            ->orderBy('created_at', 'desc')
             ->where('id_item', $id)
             ->get();
 

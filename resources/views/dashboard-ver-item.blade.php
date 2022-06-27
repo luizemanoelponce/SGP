@@ -34,7 +34,7 @@
 
                     @foreach ($items[0] as $item)
                         @foreach ($item as $key => $i)
-                            @if ($i == null)
+                            @if ($i == null || $i == '01/01/0001' )
                                 @php
                                     $item->$key = "N/A";
                                 @endphp
@@ -69,9 +69,6 @@
                         <span>
                             Atualizado em:  <input type="text" value="{{ $item->updated_at }}" readonly>
                         </span>
-                        @php
-                            // dd($items);
-                        @endphp
                         <span>
                             Atualizado por:  <input type="text" value="{{ isset($items[2]->name) ? $items[2]->name : 'N/A' }}" readonly>
                         </span>
@@ -87,14 +84,54 @@
                     @endforeach
 
                 </form>
+                <div class="tarefas">
+                    <br>
+                    <strong>Tarefas:</strong>
+                    @if (!isset($tarefas[0]))
+                        <h2>Nenhuma Tarefa Cadastrada</h2>
+                    @else
+                        <br>
+                        <table>
+                            <tr class="table-row-light">
+                                <th>Tarefa</th>
+                                <th>Iniciada em:</th>
+                                <th>Iniciada por:</th>
+                                <th colspan="2">Ações:</th>
+                            </tr>
+                            
+                            @foreach($tarefas as $tarefa)
 
+                                @php 
+
+                                    if($tarefa->data_proxima_execucao){
+                                        $tarefa->data_proxima_execucao = new DateTime($tarefa->data_proxima_execucao);
+                                        $tarefa->data_proxima_execucao = $tarefa->data_proxima_execucao->format('d/m/Y');
+                                    }
+                                    if($tarefa->data_de_inicio){
+                                        $tarefa->data_de_inicio = new DateTime($tarefa->data_de_inicio);
+                                        $tarefa->data_de_inicio = $tarefa->data_de_inicio->format('d/m/Y');
+                                    }
+
+                                @endphp
+
+                                <tr class="table-row-light">
+                                    <td>{{ $tarefa->nome_da_tarefa }}</td>
+                                    <td>{{ $tarefa->data_de_inicio }}</td>
+                                    <td>{{ $tarefa->criador_nome }} </td>
+                                    <td><a class="action" href='{{route("dashboardTarefaVer", $tarefa->id)}}' target="__blank">Ver</a></td>
+                                    <td><a class="alert" href='{{route("dashboardTarefaConcluir", $tarefa->id)}}' target="__blank">Concluir</a></td>
+                                </tr>
+
+                            @endforeach
+                        </table>
+                    @endif
+                </div>
                 
             </div>
             <div class="historico">
 
                 <h2>Historico:</h2>
                 @php
-                // dd($items);
 
                 foreach ($items[3] as $item) {
                     echo"
