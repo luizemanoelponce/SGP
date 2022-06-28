@@ -81,7 +81,7 @@
                 <br>
                 <a href="{{ route('dashboardAdicionaTarefa') }}" target="_blank">Adicionar</a>
                 @if (!isset($tarefas[0]))
-                    <h2>Nenhuma Tarefa Pendente</h2>
+                    <h2 style="color:red;">Nenhuma Tarefa Pendente</h2>
                 @else
                     <br>
                     <table>
