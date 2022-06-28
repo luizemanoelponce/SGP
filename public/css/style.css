@@ -350,7 +350,6 @@ form > span > textarea{
 .historico {
     height: 100%;
     width: 49%;
-    margin: 0 0 0 8px;
     padding: 15px 0 0 10px;
 
     border-left: 1px solid black;

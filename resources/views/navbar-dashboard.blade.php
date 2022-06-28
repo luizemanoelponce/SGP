@@ -1,5 +1,9 @@
 <nav id="navbar-dashboard">
 
+    <a href="{{ route('dashboardHome') }}" target="">
+        <img src="{{ asset('img/home.png') }}" alt="Home" >
+    </a>
+
     <a href="{{ route('dashboardAdiciona') }}" target="_blank">
         <img src="{{ asset('img/add.png') }}" alt="Adicionar Item" >
     </a>

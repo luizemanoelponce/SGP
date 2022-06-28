@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TarefaPeriodo;
+use App\Models\Historico;
 
 
 class Tarefa extends Model
@@ -101,6 +102,12 @@ class Tarefa extends Model
             'nome_da_tarefa' => $data->nome_da_tarefa,
             'id_periodo' => $data->id_periodo,
             'id_criador' => Auth::user()->id,
+        ]);
+
+        $RegHistoricoItem = Historico::create([
+            'id_item' => $data->id_item,
+            'descricao' => '<strong> Tarefa Criada: </strong>' . $data->nome_da_tarefa,
+            'id_usuario_criador' => Auth::user()->id,
         ]);
 
         return $tarefa;

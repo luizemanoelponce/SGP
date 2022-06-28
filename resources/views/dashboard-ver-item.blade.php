@@ -36,7 +36,7 @@
                         @foreach ($item as $key => $i)
                             @if ($i == null || $i == '01/01/0001' )
                                 @php
-                                    $item->$key = "N/A";
+                                    $item->$key = "N/I";
                                 @endphp
                             @endif
                         @endforeach
