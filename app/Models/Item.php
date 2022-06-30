@@ -51,7 +51,6 @@ class Item extends Model
             ->join('patrimonios', 'items.id', '=', 'patrimonios.id_item')
             ->select('items.*', 'categorias.nome as categoria_nome', 'categorias.prefixo as prefixo' , 'users.name as criador_nome', 'patrimonios.numero as patrimonio')
             ->where('items.id', $id)
-            ->where('items.status', 1)
             ->get();
         
         $atributos = Atributos::showAtributosItem($id);
@@ -75,12 +74,23 @@ class Item extends Model
 
             $ultimaAtualizacao = User::find($items[0]->id_usuario_ultima_atualizacao);
 
-        }
-
-        // dd($historico);
+        } 
 
         $dados = [$items, $atributos, $ultimaAtualizacao, $historico];
 
         return $dados;
+    }
+
+    public function getItemsDisabled(){
+        $items = DB::table('items')
+            ->join('categorias', 'items.id_categoria', '=', 'categorias.id')
+            ->join('users', 'items.id_usuario_criacao', '=', 'users.id')
+            ->join('patrimonios', 'items.id', '=', 'patrimonios.id_item')
+            ->select('items.*', 'categorias.nome as categoria_nome', 'categorias.prefixo as prefixo' , 'users.name as criador_nome', 'patrimonios.numero as patrimonio')
+            ->orderBy('patrimonio')
+            ->where('items.status', 0)
+            ->get();
+
+        return $items;
     }
 }

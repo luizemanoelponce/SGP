@@ -287,5 +287,37 @@ class DashboardController extends Controller
 
     }
 
+    public function dashboardExclui(Request $request){
+
+        $categorias = $this->categorias;
+
+        if($request->id){
+            
+            return view('dashboard-desabilita-item', [
+                'categorias' => $categorias,
+                'id_item' => $request->id
+            ]);
+
+        } else {
+            return redirect()->route('dashboardHome');
+        }
+    }
+
+    public function dashboardExcluir(Request $request){
+
+        $itemExiste = Item::where('id', $request->id_item)->get();
+
+        if(isset($itemExiste[0]->id)){
+
+            ItemController::disableItem($request);
+
+            return redirect()->route('dashboardHome', ['id' => $itemExiste[0]->id_categoria]);
+
+        } else {
+            return redirect()->route('dashboardHome');
+
+        }
+    }
+
 }
 

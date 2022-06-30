@@ -29,7 +29,7 @@
                 ";
            @endphp
             <span>
-                <strong> Data da Tarefa:  </strong> {{ $tarefas[0]->data_proxima_execucao }} <br>
+                <strong> Data da Próx Execução:  </strong> <span style="color:red;">{{ $tarefas[0]->data_proxima_execucao }}</span> <br>
                 <strong> Início da Tarefa:  </strong>  {{ $tarefas[0]->data_de_inicio }}<br>
                 <strong> Criador da Tarefa:  </strong> {{ $tarefas[0]->criador_nome }}<br>
             </span>

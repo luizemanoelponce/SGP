@@ -58,7 +58,7 @@
                                 @endif
                             @endforeach
 
-                            <td>{{ $item->prefixo.sprintf("%04s",$item->patrimonio) }}</td>
+                            <td>{{ $item->prefixo.sprintf("%02s",$item->patrimonio) }}</td>
                             <td>{{ $item->nome }}</td>
                             <td>{{ $item->localizacao }}</td>
                             <td>{{ $item->data_de_aquisicao }}</td>
@@ -67,7 +67,7 @@
                             <td>{{ $item->criador_nome }}</td>
                             <td><a class="action" href='{{route("dashboardVer", $item->id)}}' target="__blank">Ver</a></td>
                             <td><a class="alert" href='{{route("dashboardEdita", $item->id)}}' target="__blank">Editar</a></td>
-                            <td><a class="alert" href='{{--{{route("", $id)}}--}}' target="__blank">Excluir</a></td>
+                            <td><a class="alert" href='{{route("dashboardExclui", $item->id)}}' target="__blank">Excluir</a></td>
                         </tr>
                         
                     @endforeach

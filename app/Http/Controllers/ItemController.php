@@ -51,14 +51,14 @@ class ItemController extends Controller
                 Nome: $item_antes->nome <br>
                 Localização: $item_antes->localizacao <br>
                 Data de Aquisição: $item_antes->data_de_aquisicao <br>
-                ID_Categoria: $item_antes->id_categoria <br>
+                Id da Categoria: $item_antes->id_categoria <br>
             ";
 
             $item_depois = "
                 Nome: $item_depois->nome <br>
                 Localização: $item_depois->localizacao <br>
                 Data de Aquisição: $item_depois->data_de_aquisicao <br>
-                ID_Categoria: $item_depois->id_categoria <br>
+                Id da Categoria: $item_depois->id_categoria <br>
             ";
 
             $RegHistoricoItem = Historico::create([
@@ -123,6 +123,29 @@ class ItemController extends Controller
 
 
         return [$update_item, $update_atributo];
+    }
+
+    public function showByCategoriasDisabled(){
+
+        $items = Item::getItemsDisabled();
+        return $items;
+
+    }
+
+    public function disableItem($data){
+
+        $update_item = Item::where(['id' => $data->id_item])
+            ->update([
+                'status' => 0,
+                'id_usuario_ultima_atualizacao' => Auth::user()->id,
+                'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+
+        $RegHistoricoItem = Historico::create([
+            'id_item' => $data->id_item,
+            'descricao' => '<strong> Item Desabilitado: </strong><br>' . $data->descricao ,
+            'id_usuario_criador' => Auth::user()->id,
+        ]);
     }
 
 }

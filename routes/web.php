@@ -40,6 +40,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
     Route::get('/home/{id?}/ver', [DashboardController::class, 'dashboardVer'])->name('dashboardVer');
     Route::get('/home/{id?}/editar', [DashboardController::class, 'dashboardEdita'])->name('dashboardEdita');
     Route::post('home/{id?}/editar', [DashboardController::class, 'dashboardEditar'])->name('dashboardEditar');
+    Route::get('/home/{id?}/excluir', [DashboardController::class, 'dashboardExclui'])->name('dashboardExclui');
+    Route::post('home/{id?}/excluir', [DashboardController::class, 'dashboardExcluir'])->name('dashboardExcluir');
 
 });
 
